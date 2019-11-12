@@ -1,11 +1,18 @@
 import styled from 'styled-components';
 import logoPic from '../../static/logo.png';
 import betaPic from '../../static/beta.png';
+export const FixWrapper = styled.div`
+    width:100%;
+    z-index: 9999;
+    position: fixed;
+    top: 0px;
+    background-color: rgba(255, 255, 255, 1);
+
+`
 export const HeaderWrapper = styled.div`
     height: 56px;
     border-bottom: 1px solid #f0f0f0;
-    position: relative;
-    
+    text-align: center;
 `
 
 export const Link = styled.a`
@@ -13,14 +20,13 @@ export const Link = styled.a`
     height: 56px;
     display: inline-block;
     background: blue;
-    margin-right: 80px;
-    position: absolute;
-    left: 10%;
+    margin-left: -8px;
     background: url(${logoPic});
     background-size: contain;
+    float: left;
 `
 export const Nav = styled.div`
-    display: block;
+    display: inline-block;
     width : 1200px;
     height: 56px;
     margin: 0 auto;
@@ -67,8 +73,14 @@ export const NavItem = styled.a`
             
         }
     }
+    & i {
+        font-size: 24px;
+        vertical-align: middle;
+    }
+    & .Aa {
+        color: #969696
+    }
 `
-
 export const ButtonWrapper = styled.div`
     float: right;
     height: 56px;

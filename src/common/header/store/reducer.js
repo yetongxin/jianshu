@@ -7,7 +7,6 @@ const defaultState = Map({
     });
 
 export default (state = defaultState, action) => {
-    console.log(action)
     switch(action.type) {
         case ActionTypes.SEARCH_FOCUS:
             return state.set('focusedSearch',true);

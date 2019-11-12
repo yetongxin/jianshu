@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HeaderWrapper, Link, Logo, Nav, NavItem, ButtonWrapper, Button, SearchWrapper, Search,SearchInfoWrapper,SearchInfoTitle,SearchInfoContent, SearchInfoSwitch, SearchInfoItem } from './style.js'
+import { HeaderWrapper, Link, Logo, Nav, NavItem, ButtonWrapper, Button, SearchWrapper, Search,SearchInfoWrapper,SearchInfoTitle,SearchInfoContent, SearchInfoSwitch, SearchInfoItem,FixWrapper } from './style.js'
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import betaImgSrc from '../../static/beta.png'
@@ -23,7 +23,7 @@ class Header extends Component {
         let renderElems = []
         for(let i = start; i < end; i++){
             renderElems.push(
-                (<SearchInfoItem>
+                (<SearchInfoItem key={i}>
                     {searchInfoList.get(i)}
                 </SearchInfoItem>)
             )
@@ -40,64 +40,69 @@ class Header extends Component {
         // let { focusedSearch } = this.state;
         
         return(
-            <HeaderWrapper>
-                <Link className="link" href="#">
-                </Link>
-                
-                <Nav>
-                    <NavItem className="first-page" href="#"><i className="iconfont">&#xe604;</i>首页</NavItem>
-                    <NavItem className="download" href="#"><i className="iconfont">&#xe666;</i>下载App</NavItem>
-                    <SearchWrapper className="left">
-                        <CSSTransition
-                                in={focusedSearch}
-                                timeout={400}
-                                classNames="slide"
-                            >
-                            <Search className={focusedSearch ? 'focused': ''}
-								onFocus={() => handleInputFocus(curSearchPage, searchInfoList)}
-								onBlur={handleInputBlur} />
-                        </CSSTransition>
-                        <a href="#" className={focusedSearch ? "zoom focused":"zoom" }>
-                            <i className="iconfont">&#xe600;</i>
-                        </a>
-                        {focusedSearch || isMouseEnter ?
-                        <SearchInfoWrapper onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-                            <SearchInfoTitle>
-                                热门搜索
-                                <SearchInfoSwitch onClick={() => switchSeachInfo(this.spinIcon)}>
-                                    <i ref={(icon) => this.spinIcon = icon} className="iconfont">&#xe851;</i>
-                                    换一批
-                                </SearchInfoSwitch>
-                            </SearchInfoTitle>
-                            <SearchInfoContent>
-                                {this.getSearchInfoList()}
-                            </SearchInfoContent>
-                        </SearchInfoWrapper> : null
-                        }
+            <FixWrapper>
 
-                    </SearchWrapper>
-                    <ButtonWrapper className="right">
-                        <Button className="register">
-                            注册
-                        </Button>
+                <HeaderWrapper>
 
-                        <Button className="write">
-                            <i className="iconfont">&#xe602;</i>
-                            写文章
-                        </Button>
-                    </ButtonWrapper>
-                    <NavItem className="right login" href="#">登录</NavItem>
-                    <NavItem className="right beta-icon" href="#"><img src={betaImgSrc}/></NavItem>
-                    <NavItem className="right" href="#"><i className="iconfont focused zoom">&#xe601;</i></NavItem>
+                    
+                    <Nav>
+                        <Link className="link" href="#">
+                        </Link>
+                        <NavItem className="first-page" href="#"><i className="iconfont">&#xe604;</i>首页</NavItem>
+                        <NavItem className="download" href="#"><i className="iconfont">&#xe666;</i>下载App</NavItem>
+                        
+                        <SearchWrapper className="left">
+                            <CSSTransition
+                                    in={focusedSearch}
+                                    timeout={400}
+                                    classNames="slide"
+                                >
+                                <Search className={focusedSearch ? 'focused': ''}
+                                    onFocus={() => handleInputFocus(curSearchPage, searchInfoList)}
+                                    onBlur={handleInputBlur} />
+                            </CSSTransition>
+                            <a href="#" className={focusedSearch ? "zoom focused":"zoom" }>
+                                <i className="iconfont">&#xe600;</i>
+                            </a>
+                            {focusedSearch || isMouseEnter ?
+                            <SearchInfoWrapper onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+                                <SearchInfoTitle>
+                                    热门搜索
+                                    <SearchInfoSwitch onClick={() => switchSeachInfo(this.spinIcon)}>
+                                        <i ref={(icon) => this.spinIcon = icon} className="iconfont">&#xe851;</i>
+                                        换一批
+                                    </SearchInfoSwitch>
+                                </SearchInfoTitle>
+                                <SearchInfoContent>
+                                    {this.getSearchInfoList()}
+                                </SearchInfoContent>
+                            </SearchInfoWrapper> : null
+                            }
 
-                </Nav>
-                
-            </HeaderWrapper>
+                        </SearchWrapper>
+                        <ButtonWrapper className="right">
+                            <Button className="register">
+                                注册
+                            </Button>
+
+                            <Button className="write">
+                                <i className="iconfont">&#xe602;</i>
+                                写文章
+                            </Button>
+                        </ButtonWrapper>
+                        <NavItem className="right login" href="#">登录</NavItem>
+                        <NavItem className="right beta-icon" href="#"><img src={betaImgSrc}/></NavItem>
+                        <NavItem className="right" href="#"><i className="iconfont Aa">&#xe601;</i></NavItem>
+
+                    </Nav>
+                    
+                </HeaderWrapper>
+                            
+            </FixWrapper>
         )
     }
 }
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         //注意这里是header的reducer,因此是state.header,header这个属性在全局的reducer中配置
         focusedSearch: state.header.get('focusedSearch'),

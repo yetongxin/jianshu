@@ -22,14 +22,12 @@ const GetSearchInfo = (data, pageNum) => {
 }
 export const GetSearchInfoAsync = (curPage) => {
     return (dispatch) => {
-        axios.get("/api/headerList.json").then(res => {
-            let data = res.data
-            console.log(data)
-            if(data.code === 0){
-                let pageNum = Math.ceil(data.data.length/searchItemPerPage);
-                dispatch(GetSearchInfo(data.data,pageNum));
-            }
-            
+        axios.get("http://localhost:3001/api/header").then(res => {
+        let data = res.data
+        if(data.code === 0){
+            let pageNum = Math.ceil(data.data.length/searchItemPerPage);
+            dispatch(GetSearchInfo(data.data,pageNum));
+        }  
         })
     }
 }
